@@ -1,4 +1,4 @@
-package org.gyula.javaee_shop;
+package org.gyula.javaee_shop.servlets;
 
 import java.io.*;
 
