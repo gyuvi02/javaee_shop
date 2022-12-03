@@ -1,23 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>H+ Sport</title>
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
 	<header id="home" class="header">
 		<nav class="nav" role="navigation">
 			<div class="container nav-elements">
 				<div class="branding">
-					<a href="#home"><img src="../images/hpluslogo.svg"
+					<a href="#home"><img src="images/hpluslogo.svg"
 						alt="Logo - H Plus Sports"></a>
 				</div>
 				<!-- branding -->
+
 				<ul class="navbar">
 					<li><a href="home">home</a></li>
+					<li><a href="orderHistory">order history</a></li>
+					<!-- <li><a href="viewProfile">view my profile</a></li> -->
+					<li><a href='<%=response.encodeURL("viewProfile")%>'>view
+							my profile</a></li>							
+					<li><a href='logout'>logout</a></li>
 					<li><a href="redirect">linkedIn</a></li>
 
 				</ul>
@@ -25,35 +31,46 @@
 			</div>
 			<!-- container nav-elements -->
 		</nav>
-		
 		<!-- <div class="container tagline">
     <h1 class="headline">Our Mission</h1>
     <p>We support and encourage <em>active and healthy</em> lifestyles, by offering <em>ethically sourced</em> and <em>eco-friendly</em> nutritional products for the <em>performance-driven</em> athlete.</p>
   </div>container tagline -->
 	</header>
-	<!-- #home -->
 
+	<fmt:setBundle basename="com.test.resources.applicationResources"
+		var="message" scope="session" />
 
+	<section id="orders" class="section">
+		<div class="container">
+			<c:if test="${requestScope.items!=null}">
+				<h2 class="headline">
+					<fmt:message key="label.home.orders" bundle="${message}"></fmt:message>
+				</h2>
+				<table id="orderHistory">
 
+					<tr>
+						<th><fmt:message key="label.home.table.header1"
+								bundle="${message}"></fmt:message></th>
+						<th>Product Name</th>
+						<th>Order Date</th>
+						<th>Product Image</th>
 
-	<section id="registration" class="section">
-	 <div class="container tagline">
-	 <em>Register User</em><br/>
-	 <em>{0}</em>
-		<form >
-			<label>Username</label> <input type="text" name="username" id="username"><br/>
-			<label>Password</label> <input type="password" name="password" id="password"><br/>
-			<label>First Name</label> <input type="text" name="fname" id="fname"><br/>
-			<label>Last Name</label> <input type="text" name="lname" id="lname"><br/>
-			<label>Age</label> <input type="text" name="age" id="age"><br/>
-			<label>What do you want to do? </label> 
-			<input type="radio" name="activity" id="activity" value="Playing a sport">Play a Sport?
-			<input type="radio" name="activity" id="activity" value="Exercise in Gym">Hit the Gym?<br/>
-			<input type="submit" value="Submit" id="submit">
-		</form>
+					</tr>
+
+					<c:forEach items="${requestScope.items}" var="item">
+						<tr>
+
+							<td>${item.orderId}</td>
+							<td>${item.productName}</td>
+							<td>${item.orderDate}</td>
+							<td><img width="200px" height="150px"
+								src="${item.productImgPath}"></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
 		</div>
 	</section>
-	<!-- #products -->
 
 
 	<footer class="footer">
