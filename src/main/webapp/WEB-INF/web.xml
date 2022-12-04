@@ -4,16 +4,25 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
-<!--    <servlet>-->
-<!--        <servlet-name>GetServlet</servlet-name>-->
-<!--        <servlet-class>org.gyula.javaee_shop.servlets.GetServlet</servlet-class>-->
+    <servlet>
+        <servlet-name>GetServlet</servlet-name>
+        <servlet-class>org.gyula.javaee_shop.servlets.GetServlet</servlet-class>
 <!--        <load-on-startup>1</load-on-startup>-->
-<!--    </servlet>-->
+        <init-param>
+            <param-name>URL</param-name>
+            <param-value>https://www.weatherservice.com</param-value>
+        </init-param>
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>GetServlet</servlet-name>-->
-<!--        <url-pattern>/GetServlet</url-pattern>-->
-<!--    </servlet-mapping>-->
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>GetServlet</servlet-name>
+        <url-pattern>/GetServlet</url-pattern>
+    </servlet-mapping>
+
+    <context-param>
+        <param-name>dbURL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/hplus</param-value>
+    </context-param>
 
 </web-app>
