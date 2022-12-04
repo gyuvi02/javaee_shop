@@ -23,6 +23,9 @@ public class SearchServlet extends HttpServlet {
 	
 		//collect search string from the form
 		String searchString = req.getParameter("search");
+
+		req.getSession().setAttribute("search", searchString);
+
 		ApplicationDao dao = new ApplicationDao();
 		List<Product> products = dao.searchProducts(searchString);
 		
@@ -31,8 +34,11 @@ public class SearchServlet extends HttpServlet {
 
 
 		//write the products data back to the client browser
-		String page = getHTMLString(req.getServletContext().getRealPath("src/main/webapp/searchResults.html"), products);
-		resp.getWriter().write(page);
+//		String page = getHTMLString(req.getServletContext().getRealPath("src/main/webapp/searchResults.html"), products);
+//		resp.getWriter().write(page);
+		req.setAttribute("products", products);
+		req.getRequestDispatcher("/html/searchResults.jsp").forward(req, resp);
+
 	}
 	
 	/**

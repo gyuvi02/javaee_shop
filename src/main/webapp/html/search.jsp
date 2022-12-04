@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.test.beans.Product"%>
+<%@page import="org.gyula.javaee_shop.beans.Product"%>
 <%@page import="java.util.List" buffer="8kb" isELIgnored="false"
 	session="true" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isThreadSafe="true" isErrorPage="false"
@@ -210,7 +210,7 @@
 			<nav class="nav" role="navigation">
 				<div class="container nav-elements">
 					<div class="branding">
-						<a href="#home"><img src="images/hpluslogo.svg"
+						<a href="#home"><img src="../images/hpluslogo.svg"
 							alt="Logo - H Plus Sports"></a>
 						<p class="address">
 							100 Main Street<br> Seattle, WA 98144
