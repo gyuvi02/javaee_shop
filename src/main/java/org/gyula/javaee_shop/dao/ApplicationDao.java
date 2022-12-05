@@ -12,12 +12,12 @@ import org.gyula.javaee_shop.beans.User;
 
 public class ApplicationDao {
 
-	public List<Product> searchProducts(String searchString) {
+	public List<Product> searchProducts(String searchString, Connection connection) {
 		Product product = null;
 		List<Product> products = new ArrayList<>();
 		
 		try{
-			Connection connection = DBConnection.getConnectionToDatabase();
+//			Connection connection = DBConnection.getConnectionToDatabase();
 			
 			String sql = "select * from products where product_name like '%"+searchString+"%'";
 			
@@ -66,6 +66,35 @@ public class ApplicationDao {
 		}
 		return rowsAffected;
 	}
+
+	public boolean validateUser(String username, String password){
+		boolean isValidUser=false;
+		try {
+
+			// get the connection for the database
+			Connection connection = DBConnection.getConnectionToDatabase();
+
+			// write the select query
+			String sql = "select * from users where username=? and password=?";
+
+			// set parameters with PreparedStatement
+			java.sql.PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, username);
+			statement.setString(2, password);
+
+			// execute the statement and check whether user exists
+
+			ResultSet set = statement.executeQuery();
+			while(set.next()){
+				isValidUser= true;
+			}
+		}
+		catch(SQLException exception){
+			exception.printStackTrace();
+		}
+		return isValidUser;
+	}
+
 
 
 }

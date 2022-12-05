@@ -11,6 +11,7 @@ import org.gyula.javaee_shop.dao.ApplicationDao;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -26,8 +27,10 @@ public class SearchServlet extends HttpServlet {
 
 		req.getSession().setAttribute("search", searchString);
 
+		Connection connection = (Connection)getServletContext().getAttribute("dbconnection");
+
 		ApplicationDao dao = new ApplicationDao();
-		List<Product> products = dao.searchProducts(searchString);
+		List<Product> products = dao.searchProducts(searchString, connection);
 		
 		
 		//call DAO layer and get all products for search criteria

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>H+ Sport</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
@@ -15,12 +15,12 @@
 		<nav class="nav" role="navigation">
 			<div class="container nav-elements">
 				<div class="branding">
-					<a href="#home"><img src="images/hpluslogo.svg"
+					<a href="#home"><img src="../images/hpluslogo.svg"
 						alt="Logo - H Plus Sports"></a>
 				</div>
 				<!-- branding -->
 				<ul class="navbar">
-					<li><a href="home">home</a></li>
+					<li><a href="../html/home.jsp">home</a></li>
 					<li><a href="orderHistory">order history</a></li>
 					<!-- <li><a href="viewProfile">view my profile</a></li> -->
 					<li><a href='<%=response.encodeURL("viewProfile")%>'>view
@@ -39,7 +39,7 @@
   </div>container tagline -->
 	</header>
 
-	<jsp:useBean id="user" scope="request" type="com.test.beans.User"></jsp:useBean>
+	<jsp:useBean id="user" scope="request" type="org.gyula.javaee_shop.beans.User"></jsp:useBean>
 	<section>
 
 		<ex:formatDate date="<%=Calendar.getInstance().getTime()%>"
@@ -48,7 +48,7 @@
 	<section id="profile" class="section">
 		<div class="container">
 			<h2 class="headline"></h2>
-			<table id="profile">
+			<table id="profileTable">
 
 				<tr>
 					<td>Username</td>
