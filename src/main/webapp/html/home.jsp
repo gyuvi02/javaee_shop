@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 
 <html lang="en">
 <head>
@@ -37,7 +40,7 @@
   </div>container tagline -->
 	</header>
 
-	<fmt:setBundle basename="com.test.resources.applicationResources"
+	<fmt:setBundle basename="org.gyula.javaee_shop.resource.applicationResources"
 		var="message" scope="session" />
 
 	<section id="orders" class="section">
@@ -49,7 +52,7 @@
 				<table id="orderHistory">
 
 					<tr>
-						<th><fmt:message key="label.home.table.header1"
+						<th><fmt:message key="label.home.orders"
 								bundle="${message}"></fmt:message></th>
 						<th>Product Name</th>
 						<th>Order Date</th>
@@ -62,7 +65,8 @@
 
 							<td>${item.orderId}</td>
 							<td>${item.productName}</td>
-							<td>${item.orderDate}</td>
+							<td><fmt:formatDate value="${order.orderDate}"
+												pattern="YYYY-MM-dd" /></td>
 							<td><img width="200px" height="150px"
 								src="${item.productImgPath}"></td>
 						</tr>
@@ -71,6 +75,7 @@
 			</c:if>
 		</div>
 	</section>
+
 
 
 	<footer class="footer">

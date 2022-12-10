@@ -2,8 +2,10 @@ package org.gyula.javaee_shop.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.gyula.javaee_shop.beans.Order;
 import org.gyula.javaee_shop.beans.Product;
 import org.gyula.javaee_shop.beans.User;
 
@@ -122,6 +124,39 @@ public class ApplicationDao {
 		}
 		return user;
 	}
+
+	public List<Order> getOrders(String username) {
+		Order order = null;
+		List<Order> orders = new ArrayList<>();
+		try {
+			// get connection to database
+			Connection connection = DBConnection.getConnectionToDatabase();
+
+			// write select query to get order details
+			String sql = "select * from orders where user_name=?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, username);
+
+			// execute query, get resultset and return Orders info
+
+			ResultSet set = statement.executeQuery();
+			while (set.next()) {
+
+				order = new Order();
+				order.setOrderId(set.getInt("order_id"));
+				order.setProductName(set.getString("product_name"));
+				order.setProductImgPath(set.getString("image_path"));
+				order.setOrderDate(new Date(set.getDate("order_date").getTime()));
+				order.setUsername(set.getString("user_name"));
+				orders.add(order);
+			}
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+
+		return orders;
+	}
+
 
 
 
