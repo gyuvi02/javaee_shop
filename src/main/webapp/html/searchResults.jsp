@@ -1,36 +1,23 @@
 <!DOCTYPE html>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.gyula.javaee_shop.beans.Product"%>
+<%@page import="java.util.List" errorPage="error.jsp"
+	isErrorPage="false"%>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>H+ Sport</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-	<header id="home" class="header">
-		<nav class="nav" role="navigation">
-			<div class="container nav-elements">
-				<div class="branding">
-					<a href="home"><img src="images/hpluslogo.svg"
-						alt="Logo - H Plus Sports"></a>
-				</div>
-				<!-- branding -->
-				<ul class="navbar">
-					<li><a href="home">home</a></li>
-					<li><a href="#products">products</a></li>
-					<li><a href="#history">history</a></li>
-					<li><a href="login">login</a></li>
-					<li><a href="#people">people</a></li>
-					<li><a href="#search">search</a></li>
-					<li><a href="register">new user?</a></li>
-					<li><a href="redirect">linkedIn</a></li>
-				</ul>
-				<!-- navbar -->
-			</div>
-			<!-- container nav-elements -->
-		</nav>
-	</header>
+<%--	<%@ include file="header.jsp"%>--%>
+<jsp:include page="header.jsp">
+	<jsp:param name="" value=""/>
+</jsp:include>
+
 	<!-- #home -->
 
 
@@ -44,31 +31,48 @@
 				high-quality, nutrient-rich, nutritional products that <em>enhance
 					active lifestyles</em>.
 			</p>
+			<%
+				if (session.getAttribute("cart") != null) {
+			%>
 			<p>
-				<span id="size">Items in Cart: {6}</span>
+				<span id="size1"
+					title="<%=((ArrayList) session.getAttribute("cart"))%>">Items
+					in Cart: <%=((ArrayList) session.getAttribute("cart")).size()%></span>
 			</p>
+			<%
+				} else {
+			%>
+			<span id="size">Items in Cart :0</span>
+			<%
+				}
+			%>
 		</div>
+
+
+
+
+
+
 		<div class="productContainer">
-			<form method="get" action="addProducts">
+			<!-- display products through scriptlet and expression -->
+			<%
+				List<Product> products = (ArrayList) request.getAttribute("products");
+				Iterator<Product> iterator = products.iterator();
+				while (iterator.hasNext()) {
+					Product product = iterator.next();
+			%>
+			<form action="addProducts" method="get">
 
 				<div class="productContainerItem">
-					<img id="pic1" src="{0}"> <input type="text" name="product"
-						value="{3}"><br />
-					<button>Add to Cart</button>
-				</div>
-
-
-				<div class="productContainerItem">
-					<img id="pic2" src="{1}"> <input type="text" name="product"
-						value="{4}"><br />
-					<button>Add to Cart</button>
-				</div>
-				<div class="productContainerItem">
-					<img id="pic3" src="{2}"> <input type="text" name="product"
-						value="{5}"><br />
+					<img id="pic1" src="<%=product.getProductImgPath()%>"> <input
+						type="text" name="product" value="<%=product.getProductName()%>"><br />
 					<button>Add to Cart</button>
 				</div>
 			</form>
+			<%
+				}
+			%>
+
 		</div>
 	</section>
 	<!-- #products -->
@@ -166,7 +170,7 @@
 				<!-- person-card -->
 
 				<div class="person-card">
-					<img src="images/employees/PhiTang.jpg" alt="PhiTang Photo">
+					<img src="../images/employees/PhiTang.jpg" alt="PhiTang Photo">
 					<div class="card-info">
 						<h3 class="card-name">Phi Tang, MBA</h3>
 						<h4 class="card-title">Director of Product Development</h4>
@@ -184,7 +188,7 @@
 				<!-- person-card -->
 
 				<div class="person-card">
-					<img src="images/employees/MariaSontas.jpg" alt="MariaSontas Photo">
+					<img src="../images/employees/MariaSontas.jpg" alt="MariaSontas Photo">
 					<div class="card-info">
 						<h3 class="card-name">Maria Sontas</h3>
 						<h4 class="card-title">Director of Marketing</h4>
